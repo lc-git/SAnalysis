@@ -9,8 +9,6 @@
 * audio detection（关键词，哨声，评论员）
 * team label, player label
 
-<h6 id="1">automatic soccer video analysis and summarization</h6>
-
 ## 录入数据（目的）
 * 所有门户网站的基本数据
 * 事件时间，地点
@@ -42,7 +40,15 @@
 * 自动捕捉的数据的人工校对机制
 
 ## 主要算法：
-  1. Dominant Color ([paper](#1))
+  1. Dominant Color (paper1)
     * HSI 空间上计算直方图
-    * paper: automatic soccer video analysis and summarization
-  2. View Type/Shot Type
+
+  2. View Type/Shot Type (paper1)
+    * 根据 Dominant Color/ Field Color 计算出每个镜头的场地面积百分比
+    * 根据特定区域内的场地面积百分比区分long shot/middle shot/close up shot/non-field shot
+
+  3. Position Classification (paper1)
+    *
+
+## 论文
+1. automatic soccer video analysis and summarization
