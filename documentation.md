@@ -39,4 +39,11 @@
 * 那些自动哪些手动
 * 自动捕捉的数据的人工校对机制
 
-[dominant color](dominant_color.md)
+## 主要算法：
+  1. Dominant Color ([paper](#1))
+    * HSI 空间上计算直方图
+    * paper: automatic soccer video analysis and summarization
+  2. View Type/Shot Type
+
+
+<h6 id="1">automatic soccer video analysis and summarization</h6>
