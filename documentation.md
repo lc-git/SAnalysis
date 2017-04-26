@@ -9,6 +9,8 @@
 * audio detection（关键词，哨声，评论员）
 * team label, player label
 
+<h6 id="1">automatic soccer video analysis and summarization</h6>
+
 ## 录入数据（目的）
 * 所有门户网站的基本数据
 * 事件时间，地点
@@ -44,6 +46,3 @@
     * HSI 空间上计算直方图
     * paper: automatic soccer video analysis and summarization
   2. View Type/Shot Type
-
-
-<h6 id="1">automatic soccer video analysis and summarization</h6>
