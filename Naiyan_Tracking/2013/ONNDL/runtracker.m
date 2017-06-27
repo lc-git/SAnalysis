@@ -16,6 +16,17 @@ frame = double(data(:,:,1))/256;
 tmpl.mean = warpimg(frame, param0, opt.tmplsize);
 tmpl.mean = tmpl.mean / norm(tmpl.mean);  
 tmpl.basis = [];
+
+
+% p = [px, py, sx, sy, theta]; The location of the target in the first
+% frame.
+% px and py are th coordinates of the centre of the box
+% sx and sy are the size of the box in the x (width) and y (height)
+%   dimensions, before rotation
+% theta is the rotation angle of the box
+% paramOld = [p(1), p(2), p(3)/opt.tmplsize(2), p(5), p(4) /p(3) / (opt.tmplsize(1) / opt.tmplsize(2)), 0];
+% (x, y, scale, th, aspect, skew)
+
 % Sample positive templates
 for i = 1 : opt.maxbasis / 10 
     tmpl.basis(:, (i - 1) * 10 + 1 : i * 10) = samplePos(frame, param0, opt.tmplsize);
@@ -45,8 +56,8 @@ wimgs = [];
 
 duration = 0; tic;
 % Initialize sufficient statistics for online update.
-A = cell(prod(opt.tmplsize), 1);
-B = cell(prod(opt.tmplsize), 1);
+A = cell(prod(opt.tmplsize), 1);      % A is (20*20)*number of pixels
+B = cell(prod(opt.tmplsize), 1);      % B is (20*1)*number of pixels
 for i = 1 : prod(opt.tmplsize)
     A{i} = zeros(opt.maxbasis, opt.maxbasis);
     B{i} = zeros(opt.maxbasis, 1);
@@ -55,21 +66,27 @@ end
 % Parameters for feature selection.
 paramSR.lambda2 = 0;
 paramSR.mode = 2;
+
+%selected features
 posOri = selectFeature(tmpl.basis(:, 1 : opt.maxbasis), tmpl.basis(:, opt.maxbasis + 1 : end), paramSR, prod(opt.tmplsize));  
 k = sum(posOri);             % the number of selected feature
 temp = find(posOri);
-P = zeros(N,k);
+P = zeros(N,k);              % N is the number of pixels in one template, P is k hot vectors, each vector is a feature
 for i = 1:k
     P(temp(i),i) = 1;
 end
 opt.P = P;
-ori = repmat(tmpl.basis(:, 1 : opt.maxbasis), 1, 5);
+ori = repmat(tmpl.basis(:, 1 : opt.maxbasis), 1, 5);  %repeat target template   *20 -> *100
 pos = ori;
-for f = 1:size(data,3) 
+for f = 1:size(data,3)    %iterate all images
   frame = double(data(:,:,f))/256;
   
   % do tracking
    param = estwarp_condens(frame, tmpl, param, opt);
+   % param.est = affparam2mat(param.param(:,maxidx));
+   % param.wimg = reshape(oriData(:,maxidx), sz);
+   % param.err = reshape(oriData(:,maxidx) - tmpl.basis * coef(:, maxidx), sz);    ????????
+   % param.recon = reshape(tmpl.basis(:, 1 : opt.maxbasis) * coef(1 : opt.maxbasis, maxidx), sz);
 
   % do update
   wimgs = [wimgs, param.wimg(:)];
