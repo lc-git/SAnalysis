@@ -1,4 +1,6 @@
 function [A, B, U] = updateBase(A, B, U, Y, opt)
+    % U is target templates
+    % Y is warp images in the last batch (5 images)
 	step = 0.2;
     maxIter = 100;
     tol = 1e-2;
