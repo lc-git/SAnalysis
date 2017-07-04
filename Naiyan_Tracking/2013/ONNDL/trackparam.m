@@ -69,7 +69,7 @@ case 'bolt'; p = [277+15 77+30 30 60 0];
              
 case 'singer2';  p = [350 250 80 200 0];
     opt = struct('batchsize',5, 'affsig',[4,4,.005,.000,.001,.000]);
-case 'basketball';  p = [210 260 40 100 0];
+case 'basketball';  p = [210 260 40 100 0]; %132ballp = [378 211 20 20 0];   %96ball: p = [267 217 20 20 0];  
     opt = struct('batchsize',5, 'affsig',[4,4,.005,.000,.001,.000]);    
 case 'woman';  p = [222 165 35 95 0.0]; 
     opt = struct('batchsize',3, 'affsig',[4,4,.005,.000,.001,.000]);               
@@ -111,6 +111,7 @@ end
 if size(d, 1) == 0
     d = dir([fullPath, '*.bmp']);
 end
+%d = d(132 : end);
 im = imread([fullPath, d(1).name]);
 data = zeros(size(im, 1), size(im, 2), size(d, 1));
 for i = 1 : size(d, 1)

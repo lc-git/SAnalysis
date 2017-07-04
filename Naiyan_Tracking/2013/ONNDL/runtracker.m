@@ -9,6 +9,18 @@ addpath('./drawUtility');
 addpath(genpath('./SLEP_package_4.1/'));
 trackparam;
 
+% S = load('basketball_ONNDL.mat');
+% res = S.savedRes;
+% for i = 1:size(res, 1)
+%     frame = double(data(:,:,i))/256;
+%     imshow(frame);
+%     hold on;
+%     rectangle('Position', [res(i, 1) - 10, res(i, 2) - 10, 20, 20], 'EdgeColor', 'r', 'LineWidth', 3);
+%     hold off
+%     pause(0.2)
+% end
+
+
 % initialize variables
 rand('state',0);  randn('state',0);
 frame = double(data(:,:,1))/256;
