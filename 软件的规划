@@ -1,0 +1,14 @@
+# 软件的规划
+
+* Player Tracking
+
+  球的追踪相对难度比较高，而且球的定位可以通过键盘的快速录入，所以可以先从球员的输入开始
+  1. 去背景，确定球场范围
+  * detect 识别球员（分类器训练+颜色+初始状态手动添加）
+  * track 追踪球员（naiyan的单个物体追踪*22+track by detection+context）
+  * 追踪过程中出现错误的时候的人工矫正的方法 ???（很多种情况要具体讨论）
+
+* Tracking部分
+  1. deformable part model
+  2. conditional random field
+  3. CNN
